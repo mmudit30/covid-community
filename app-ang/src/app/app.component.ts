@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
   async joinChat() {
     const { username } = this;
     try {
-      const response = await axios.post('http://161.35.110.5:3000/join', {
+      const response = await axios.post('http://167.99.155.7:3000/join', {
         username
       });
       const { token } = response.data;
@@ -109,7 +109,7 @@ export class AppComponent implements OnInit {
 
     console.log(newchannelName+" " + newchannelId + " " + username);
     
-    const response = await axios.post('http://161.35.110.5:3000/add-channel', {
+    const response = await axios.post('http://167.99.155.7:3000/add-channel', {
       newchannelName, newchannelId, username
     });
     console.log(response.data.msg);
