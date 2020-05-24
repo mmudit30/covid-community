@@ -25,12 +25,12 @@ exports.auth = async function(req, res) {
     const validPassword = await bcrypt.compare(req.body.data.password, user.password).then(function(result) {
         if (!result) {
             res.json({
-                message: 'error',
+                status: 'error',
                 data: result
             });
         } else {
             res.json({
-                message: 'success',
+                status: 'success',
                 data: true
             });
             return res.send('Authentication Successful!');

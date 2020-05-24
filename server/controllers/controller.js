@@ -71,6 +71,7 @@ exports.update = function(req, res) {
         user.save(function(err) {
             if (err) res.json(err);
             res.json({
+                status: 'success',
                 message: 'User Info updated',
                 data: user
             });
