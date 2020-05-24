@@ -40,6 +40,7 @@ exports.new = async function(req, res) {
             if (err) res.json(err);
             else
                 res.json({
+                    status: 'success',
                     message: 'New user created!',
                     data: user
                 });
