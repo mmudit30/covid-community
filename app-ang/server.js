@@ -18,11 +18,6 @@ const serverSideClient = new StreamChat(
   process.env.STREAM_APP_SECRET
 );
 
-// key 
-// 356h2ygsn8at
-
-// secret
-// 26w37ajn78ya8gu7m7fs4s54bhjk7qc535nrezhyuu6tm9w4weknk3dngpr8wqbs
 
 app.post('/add-channel', async (req, res) => {
     const { newchannelName, newchannelId, username } = req.body;
@@ -93,7 +88,7 @@ app.post('/join', async (req, res) => {
     .json({ user: { username }, token, api_key: process.env.STREAM_API_KEY });
 });
 
-const server = app.listen(process.env.PORT || 5500, () => {
+const server = app.listen(process.env.PORT || 3000, () => {
   const { port } = server.address();
   console.log(`Server running on PORT ${port}`);
 });
