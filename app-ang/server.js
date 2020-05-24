@@ -24,7 +24,42 @@ const serverSideClient = new StreamChat(
 // secret
 // 26w37ajn78ya8gu7m7fs4s54bhjk7qc535nrezhyuu6tm9w4weknk3dngpr8wqbs
 
-
+app.post('/add-channel', async (req, res) => {
+    const { newchannelName, newchannelId, username } = req.body;
+    console.log(req.body);    
+    console.log(newchannelName +" "+ newchannelId + " " +username);
+    
+    // const token = serverSideClient.createToken(username);
+    // try {
+    //   await serverSideClient.updateUser(
+    //     {
+    //       id: username,
+    //       name: username,
+    //     },
+    //     token
+    //   );
+    // } catch (err) {
+    //   // console.log(err);
+    // }
+  
+    const admin = { id: 'admin' };
+    const channel = serverSideClient.channel('team', newchannelId, {
+      name: newchannelName,
+      created_by: admin,
+    });
+  
+    try {
+      await channel.create();
+      await channel.addMembers([username, 'admin']);
+    } catch (err) {
+      console.log(err);
+    }
+  
+    return res
+      .status(200)
+      .json({msg: "lol "})
+    //   .json({ user: { username }, token, api_key: process.env.STREAM_API_KEY });
+  });
 app.post('/join', async (req, res) => {
   const { username } = req.body;
   const token = serverSideClient.createToken(username);
@@ -41,9 +76,8 @@ app.post('/join', async (req, res) => {
   }
 
   const admin = { id: 'admin' };
-  const channel = serverSideClient.channel('team', 'demo', {
-    name: 'DEmo',
-    image: 'icon-spark.png',
+  const channel = serverSideClient.channel('team', 'recentlydiagnosed', {
+    name: 'Recently Diagnosed',
     created_by: admin,
   });
 
@@ -51,7 +85,7 @@ app.post('/join', async (req, res) => {
     await channel.create();
     await channel.addMembers([username, 'admin']);
   } catch (err) {
-    // console.log(err);
+    console.log(err);
   }
 
   return res

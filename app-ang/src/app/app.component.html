@@ -19,31 +19,78 @@
     </form>
   </div>
 
-  <div *ngIf="channel" class="container">
-    <h3 class=" text-center">Stream Messaging</h3>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Add New Channel</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="text"           
+          class="form-control"
+          placeholder="channel name" [(ngModel)]="newChannelName" id="">
+          <input type="text"           
+          class="form-control"
+          placeholder="channel id" [(ngModel)]="newChannelId" id="">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="createChannel()" data-dismiss="modal">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="channel" class="container chat-content">
+    <h3 class="text-center">My Covid Community</h3>
     <div class="messaging">
       <div class="inbox_msg">
         <div class="inbox_people">
           <div class="headind_srch">
             <div class="channel_heading">
-              <h4>Channels</h4>
+              <div class="col-12 mb-2">
+                <h4 class="text-center">Channels</h4>
+              </div>
+                <button
+                  data-toggle="modal" 
+                  data-target="#exampleModalCenter"
+                  class="bg-primary newChannelBtn btn text-white">
+                  ADD NEW
+                </button>
             </div>
           </div>
           <div class="inbox_chat">
             <div class="channels" *ngFor="let channel of channelList">
-              <div class="chat_list">
+              <div 
+              [ngClass]="{'active_chat': selChannel.data.cid === channel.cid}"
+              class="chat_list" 
+              (click)="setChannel(channel.cid)">
                 <div class="chat_people">
                   <div class="chat_ib">
+                    <span
+                        class="msg_avatar"
+                        [ngStyle]="{'background-color': 'tomato'}"
+                      >
+                    </span>
+
                     <h5>
-                      {{ channel.data.name }}
+                      {{ channel.data.name }} &nbsp;
+                      ({{ channel.data.id }})
+                      <span class="lead">
+                        ({{channel.data.type}})
+                      </span>
                     </h5>
-                    <p>
+                    <!-- <p *ngIf="channel.state.messages">
                       {{
-                        channel.state.messages[
-                          channel.state.messages.length - 1
-                        ].text
+                        channel.state.messages[channel.state.messages.length-1].text
                       }}
-                    </p>
+                    </p> -->
                   </div>
                 </div>
               </div>
@@ -51,6 +98,20 @@
           </div>
         </div>
         <div class="mesgs">
+          <div>
+            <div class="mb-3">
+              <h4>
+                {{ selChannel.data.name}}
+              </h4>
+              <span class="lead">
+                {{ selChannel.data.id }}
+                ({{ selChannel.data.type }})
+              </span>
+              <span style="float: right;">
+                <button (click)="deleteChannel()" class="bg-danger btn text-white">DELETE</button>
+              </span>
+            </div>
+          </div>
           <div class="msg_history">
             <li class="message" *ngFor="let message of messages">
               <div
@@ -61,12 +122,21 @@
                 "
               ></div>
               <ng-template #incoming_msg>
-                <div class="incoming_msg">
-                  <div class="incoming_msg_img">
-                    <img
-                      src="https://i.imgur.com/k2PZLZa.png"
-                      alt="User avatar"
-                    />
+                <div class="incoming_msg m-1">
+                  <div class="incoming_msg_img mb-1">
+                    <span>
+                      <div 
+                        class="msg_avatar"
+                        [ngStyle]="{'background-color': getColor(message.user.id)}"
+                        >
+                      </div>
+                    </span>
+                    <span
+                    style="text-shadow: 0px 0px 10px #524f4f;"
+                    [ngStyle]="{'color': getColor(message.user.id)}"
+                    >
+                      {{ message.user.name }}
+                    </span>
                   </div>
                   <div class="received_msg">
                     <div class="received_withd_msg">

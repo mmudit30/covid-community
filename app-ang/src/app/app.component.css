@@ -1,3 +1,13 @@
+.content{
+	background-image: url('../assets/back.jpeg');
+}
+.chat-content{
+	/* background-color: #fff; */
+}
+h3{
+	background-color: #009688;
+	color: #fff;
+}
 .login {
 	position: absolute;
 	width: 100%;
@@ -24,6 +34,8 @@ img {
 	border-right: 1px solid #c4c4c4;
 }
 
+
+
 .inbox_msg {
 	border: 1px solid #c4c4c4;
 	clear: both;
@@ -36,7 +48,7 @@ img {
 
 .channel_heading {
 	float: left;
-	width: 40%;
+	width: 100%;
 }
 
 .srch_bar {
@@ -49,12 +61,16 @@ img {
 	padding: 10px 29px 10px 20px;
 	overflow: hidden;
 	border-bottom: 1px solid #c4c4c4;
+	background-color: #009688;
 }
 
 .channel_heading h4 {
-	color: #05728f;
+	color: #fff;
 	font-size: 21px;
 	margin: auto;
+}
+.newChannelBtn{
+	width: -webkit-fill-available;
 }
 
 .srch_bar input {
@@ -79,7 +95,7 @@ img {
 
 .chat_ib h5 {
 	font-size: 15px;
-	color: #464646;
+	color: #fff;
 	margin: 0 0 8px 0;
 }
 
@@ -109,32 +125,51 @@ img {
 	overflow: hidden;
 	clear: both;
 }
+.chat_list:hover, .chat_list:hover h5{
+	background-color: #fff;
+	color: #000;
+}
 
 .chat_list {
 	border-bottom: 1px solid #c4c4c4;
 	margin: 0;
 	padding: 18px 16px 10px;
+	cursor: pointer;
 }
 
 .inbox_chat {
 	height: 550px;
 	overflow-y: scroll;
+	background-image: url('../assets/blackshadow.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
 }
 
-.active_chat {
-	background: #ebebeb;
+.active_chat{
+	background: #fff;
+}
+.active_chat .chat_ib h5{
+	color: black;
 }
 
 .incoming_msg_img {
 	display: inline-block;
-	width: 6%;
+	width: 50%;
+}
+.msg_avatar {
+	height: 30px;
+	width: 30px;
+	max-width: 100%;
+	background-size: cover;
+	border-radius: 100%;
 }
 
 .received_msg {
 	display: inline-block;
 	padding: 0 0 0 10px;
 	vertical-align: top;
-	width: 92%;
+	width: 100%;
 }
 
 .received_withd_msg p {
@@ -146,6 +181,9 @@ img {
 	padding: 5px 10px 5px 12px;
 	width: 100%;
 }
+.received_withd_msg {
+	width: 57%;
+}
 
 .time_date {
 	color: #747474;
@@ -154,14 +192,12 @@ img {
 	margin: 8px 0 0;
 }
 
-.received_withd_msg {
-	width: 57%;
-}
 
 .mesgs {
 	float: left;
 	padding: 30px 15px 0 25px;
 	width: 60%;
+	background-color: #fff;
 }
 
 .sent_msg p {
@@ -213,12 +249,16 @@ img {
 }
 
 .messaging {
-	padding: 0 0 50px 0;
+	/* padding: 0 0 50px 0; */
 }
 
 .msg_history {
 	height: 516px;
 	overflow-y: auto;
+	background-position: center;
+	background-image: url('../assets/backchat.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .message {
